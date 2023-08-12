@@ -1,0 +1,13 @@
+# See https://docs.rubocop.org/rubocop/configuration
+
+require:
+  - rubocop-factory_bot
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+
+Style/Documentation:
+  Enabled: false
