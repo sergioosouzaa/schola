@@ -17,6 +17,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 # gem "sassc-rails"
 
 group :development, :test do
+  gem 'capybara', '~> 3.39'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails', '~> 6.2'
   gem 'ffaker', '~> 2.21'
@@ -26,6 +27,7 @@ end
 
 group :development do
   gem 'rubocop', '~> 1.56', require: false
+  gem 'rubocop-capybara', '~> 2.18', require: false
   gem 'rubocop-factory_bot', '~> 2.23', require: false
   gem 'rubocop-performance', '~> 1.18', require: false
   gem 'rubocop-rails', '~> 2.20', require: false

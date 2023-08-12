@@ -1,4 +1,9 @@
 # https://guides.rubyonrails.org/i18n.html
 
 en:
-  hello: "Hello world"
+  flash:
+    student:
+      success:
+        create: Student was successfully created.
+        update: Student was successfully updated.
+        destroy: Student was successfully destroyed.

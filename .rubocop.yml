@@ -1,6 +1,7 @@
 # See https://docs.rubocop.org/rubocop/configuration
 
 require:
+  - rubocop-capybara
   - rubocop-factory_bot
   - rubocop-performance
   - rubocop-rails
@@ -11,3 +12,14 @@ AllCops:
 
 Style/Documentation:
   Enabled: false
+
+RSpec/ExampleLength:
+  Exclude: 
+    - spec/views/**/*
+
+RSpec/NestedGroups:
+  Max: 5
+
+RSpec/MultipleExpectations:
+  Exclude: 
+    - spec/views/**/*
