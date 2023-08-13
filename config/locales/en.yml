@@ -7,3 +7,8 @@ en:
         create: Student was successfully created.
         update: Student was successfully updated.
         destroy: Student was successfully destroyed.
+    subject:
+      success:
+        create: Subject was successfully created.
+        update: Subject was successfully updated.
+        destroy: Subject was successfully destroyed.
