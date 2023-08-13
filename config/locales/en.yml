@@ -17,3 +17,8 @@ en:
         create: Teacher was successfully created.
         update: Teacher was successfully updated.
         destroy: Teacher was successfully destroyed.
+    course:
+      success:
+        create: Course was successfully created.
+        update: Course was successfully updated.
+        destroy: Course was successfully destroyed.

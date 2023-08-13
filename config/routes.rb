@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   resources :students
   resources :teachers
+  resources :courses
   resources :subjects
 
   root 'students#index'

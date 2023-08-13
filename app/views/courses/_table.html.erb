@@ -1,0 +1,31 @@
+<div id="courses" class="min-w-full ">
+  <div class="rounded-xl overflow-auto">
+    <table class="border-collapse table-auto w-full text-sm">
+      <thead>
+        <tr>
+          <th class="bg-blue-100 border text-left px-8 py-4 whitespace-nowrap">Name</th>
+          <th class="bg-blue-100 border text-left px-8 py-4 whitespace-nowrap">Year</th>
+          <th class="bg-blue-100 border text-left px-8 py-4 whitespace-nowrap">Starts on</th>
+          <th class="bg-blue-100 border text-left px-8 py-4 whitespace-nowrap">Ends on</th>
+          <th class="bg-blue-100 border text-left px-8 py-4 whitespace-nowrap"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% courses.each do |course| %>
+          <tr>
+            <td class="border px-8 py-4 w-full whitespace-nowrap"><%= course.name %></td>
+            <td class="border px-8 py-4 w-full whitespace-nowrap"><%= course.year %></td>
+            <td class="border px-8 py-4 w-full whitespace-nowrap"><%= course.starts_on %></td>
+            <td class="border px-8 py-4 w-full whitespace-nowrap"><%= course.ends_on %></td>
+            <td class="border px-8 py-4 whitespace-nowrap">
+              <%= link_to 'Show', course, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+              <%= link_to 'Edit', edit_course_path(course), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
