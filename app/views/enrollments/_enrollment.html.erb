@@ -1,0 +1,22 @@
+<div id="<%= dom_id enrollment %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Code:</strong>
+    <%= enrollment.code %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Student:</strong>
+    <%= enrollment.student.name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Course:</strong>
+    <%= enrollment.course.year %> - <%= enrollment.course.name %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this enrollment", enrollment, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this enrollment', edit_enrollment_path(enrollment), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

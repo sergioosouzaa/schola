@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   resources :students
+  resources :enrollments, param: :code
   resources :teachers
   resources :courses
   resources :subjects

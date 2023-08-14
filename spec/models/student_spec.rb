@@ -34,4 +34,8 @@ RSpec.describe Student do
       end
     end
   end
+
+  describe 'associations' do
+    it { is_expected.to have_many(:enrollments).dependent(:destroy) }
+  end
 end

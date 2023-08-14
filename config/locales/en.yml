@@ -22,3 +22,8 @@ en:
         create: Course was successfully created.
         update: Course was successfully updated.
         destroy: Course was successfully destroyed.
+    enrollment:
+      success:
+        create: Enrollment was successfully created.
+        update: Enrollment was successfully updated.
+        destroy: Enrollment was successfully destroyed.
