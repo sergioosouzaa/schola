@@ -27,3 +27,8 @@ en:
         create: Enrollment was successfully created.
         update: Enrollment was successfully updated.
         destroy: Enrollment was successfully destroyed.
+    exam:
+      success:
+        create: Exam was successfully created.
+        update: Exam was successfully updated.
+        destroy: Exam was successfully destroyed.

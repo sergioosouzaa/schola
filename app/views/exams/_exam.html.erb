@@ -1,0 +1,22 @@
+<div id="<%= dom_id exam %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Course:</strong>
+    <%= exam.course.year %> - <%= exam.course.name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Subject:</strong>
+    <%= exam.subject.name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Realized on:</strong>
+    <%= exam.realized_on %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this exam", exam, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this exam', edit_exam_path(exam), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

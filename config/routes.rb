@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :enrollments, param: :code
   resources :teachers
   resources :courses
+  resources :exams
   resources :subjects
 
   root 'students#index'
