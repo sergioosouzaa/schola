@@ -13,5 +13,6 @@ RSpec.describe Enrollment do
   describe 'associations' do
     it { is_expected.to belong_to(:student) }
     it { is_expected.to belong_to(:course) }
+    it { is_expected.to have_many(:grades).dependent(:destroy).with_foreign_key(:enrollment_code) }
   end
 end

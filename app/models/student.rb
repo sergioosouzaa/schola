@@ -6,4 +6,5 @@ class Student < ApplicationRecord
                       comparison: { less_than: proc { Time.zone.today } }
 
   has_many :enrollments, dependent: :destroy
+  has_many :grades, through: :enrollments
 end

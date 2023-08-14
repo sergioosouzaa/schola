@@ -5,4 +5,7 @@ class Exam < ApplicationRecord
 
   belongs_to :course
   belongs_to :subject
+
+  has_many :grades, dependent: :destroy
+  has_many :enrollments, through: :grades
 end

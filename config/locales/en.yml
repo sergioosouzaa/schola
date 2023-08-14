@@ -32,3 +32,8 @@ en:
         create: Exam was successfully created.
         update: Exam was successfully updated.
         destroy: Exam was successfully destroyed.
+    grade:
+      success:
+        create: Grade was successfully created.
+        update: Grade was successfully updated.
+        destroy: Grade was successfully destroyed.

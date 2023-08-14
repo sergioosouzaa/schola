@@ -10,5 +10,7 @@ RSpec.describe Exam do
   describe 'associations' do
     it { is_expected.to belong_to(:subject) }
     it { is_expected.to belong_to(:course) }
+    it { is_expected.to have_many(:grades).dependent(:destroy) }
+    it { is_expected.to have_many(:enrollments).through(:grades) }
   end
 end

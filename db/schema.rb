@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_14_023224) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_14_031614) do
   create_table "courses", force: :cascade do |t|
     t.integer "year", null: false
     t.string "name", null: false
@@ -40,6 +40,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_023224) do
     t.index ["subject_id"], name: "index_exams_on_subject_id"
   end
 
+  create_table "grades", force: :cascade do |t|
+    t.float "value", null: false
+    t.string "enrollment_code", null: false
+    t.integer "exam_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["enrollment_code"], name: "index_grades_on_enrollment_code"
+    t.index ["exam_id"], name: "index_grades_on_exam_id"
+  end
+
   create_table "students", force: :cascade do |t|
     t.string "name", null: false
     t.date "born_on", null: false
@@ -64,4 +74,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_023224) do
   add_foreign_key "enrollments", "students"
   add_foreign_key "exams", "courses"
   add_foreign_key "exams", "subjects"
+  add_foreign_key "grades", "enrollments", column: "enrollment_code", primary_key: "code"
+  add_foreign_key "grades", "exams"
 end

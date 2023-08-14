@@ -37,5 +37,6 @@ RSpec.describe Student do
 
   describe 'associations' do
     it { is_expected.to have_many(:enrollments).dependent(:destroy) }
+    it { is_expected.to have_many(:grades).through(:enrollments) }
   end
 end
