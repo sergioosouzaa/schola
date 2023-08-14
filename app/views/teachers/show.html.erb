@@ -5,6 +5,14 @@
     <% end %>
 
     <%= render @teacher %>
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Subjects:</strong>
+      <%= render 'subjects/table', subjects: @teacher.subjects %>
+    </p>
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Courses:</strong>
+      <%= render 'courses/table', courses: @teacher.courses %>
+    </p>
 
     <%= link_to 'Edit this teacher', edit_teacher_path(@teacher), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <div class="inline-block ml-2">

@@ -37,3 +37,12 @@ en:
         create: Grade was successfully created.
         update: Grade was successfully updated.
         destroy: Grade was successfully destroyed.
+    teacher_assignment:
+      success:
+        create: Teacher assignment was successfully created.
+        update: Teacher assignment was successfully updated.
+        destroy: Teacher assignment was successfully destroyed.
+
+  activerecord:
+    models:
+      teacher_assignment: Assignment

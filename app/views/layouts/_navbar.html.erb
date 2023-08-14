@@ -4,35 +4,19 @@
       <div class="flex px-4 justify-between items-center w-full">
         <div>
           <nav
-              id="navbarCollapse"
-              class="
-                     absolute
-                     py-5
-                     lg:py-0 lg:px-4
-                     xl:px-6
-                     bg-white
-                     lg:bg-transparent
-                     shadow-lg
-                     rounded-lg
-                     max-w-[250px]
-                     w-full
-                     lg:max-w-full lg:w-full
-                     right-4
-                     top-full
-                     lg:block
-                     lg:static 
-                     lg:shadow-none
-                     "
-              >
-              <ul class="blcok lg:flex">
-                <%= render 'layouts/navitem', path: students_path, text: 'Students' %>
-                <%= render 'layouts/navitem', path: enrollments_path, text: 'Enrollments' %>
-                <%= render 'layouts/navitem', path: grades_path, text: 'Grades' %>
-                <%= render 'layouts/navitem', path: teachers_path, text: 'Teachers' %>
-                <%= render 'layouts/navitem', path: courses_path, text: 'Courses' %>
-                <%= render 'layouts/navitem', path: exams_path, text: 'Exams' %>
-                <%= render 'layouts/navitem', path: subjects_path, text: 'Subjects' %>
-              </ul>
+            id="navbarCollapse"
+            class="absolute py-5 lg:py-0 lg:px-4 xl:px-6 bg-white lg:bg-transparent shadow-lg rounded-lg max-w-[250px] w-full lg:max-w-full lg:w-full right-4 top-full lg:block lg:static lg:shadow-none"
+          >
+            <ul class="blcok lg:flex">
+              <%= render 'layouts/navitem', path: students_path, text: 'Students' %>
+              <%= render 'layouts/navitem', path: enrollments_path, text: 'Enrollments' %>
+              <%= render 'layouts/navitem', path: grades_path, text: 'Grades' %>
+              <%= render 'layouts/navitem', path: teachers_path, text: 'Teachers' %>
+              <%= render 'layouts/navitem', path: teacher_assignments_path, text: 'Assignments' %>
+              <%= render 'layouts/navitem', path: courses_path, text: 'Courses' %>
+              <%= render 'layouts/navitem', path: exams_path, text: 'Exams' %>
+              <%= render 'layouts/navitem', path: subjects_path, text: 'Subjects' %>
+            </ul>
           </nav>
         </div>
       </div>

@@ -1,0 +1,41 @@
+<%= form_with(model: teacher_assignment, class: "contents") do |form| %>
+  <% if teacher_assignment.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(teacher_assignment.errors.count, "error") %> prohibited this teacher_assignment from being saved:</h2>
+
+      <ul>
+        <% teacher_assignment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :teacher_id %>
+    <%= form.select :teacher_id,
+      Teacher.order(:name).pluck(:name, :id),
+      { include_blank: true },
+      class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :subject_id %>
+    <%= form.select :subject_id,
+      Subject.order(:name).pluck(:name, :id),
+      { include_blank: true },
+      class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :course_id %>
+    <%= form.select :course_id,
+      Course.order(:name).pluck(:name, :year, :id).map { |(name, year, id)| ["#{year} - #{name}", id] },
+      { include_blank: true },
+      class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

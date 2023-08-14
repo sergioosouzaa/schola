@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :enrollments, param: :code
   resources :grades
   resources :teachers
+  resources :teacher_assignments
   resources :courses
   resources :exams
   resources :subjects

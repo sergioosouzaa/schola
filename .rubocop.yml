@@ -25,4 +25,4 @@ RSpec/MultipleExpectations:
     - spec/views/**/*
 
 RSpec/MultipleMemoizedHelpers:
-  Max: 6
+  Max: 7

@@ -8,4 +8,7 @@ class Course < ApplicationRecord
   validates :starts_on, presence: true
   validates :ends_on, presence: true,
                       comparison: { greater_than: :starts_on }
+
+  has_many :teacher_assignments, dependent: :destroy
+  has_many :teachers, through: :teacher_assignments
 end

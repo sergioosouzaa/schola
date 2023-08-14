@@ -37,4 +37,9 @@ RSpec.describe Course do
       it { expect(course.errors[:ends_on]).to include('must be greater than 2022-11-01') }
     end
   end
+
+  describe 'associations' do
+    it { is_expected.to have_many(:teacher_assignments).dependent(:destroy) }
+    it { is_expected.to have_many(:teachers).through(:teacher_assignments) }
+  end
 end

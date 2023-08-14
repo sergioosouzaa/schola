@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_14_031614) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_14_044714) do
   create_table "courses", force: :cascade do |t|
     t.integer "year", null: false
     t.string "name", null: false
@@ -64,6 +64,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_031614) do
     t.index ["name"], name: "index_subjects_on_name", unique: true
   end
 
+  create_table "teacher_assignments", force: :cascade do |t|
+    t.integer "teacher_id", null: false
+    t.integer "subject_id", null: false
+    t.integer "course_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_teacher_assignments_on_course_id"
+    t.index ["subject_id"], name: "index_teacher_assignments_on_subject_id"
+    t.index ["teacher_id"], name: "index_teacher_assignments_on_teacher_id"
+  end
+
   create_table "teachers", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -76,4 +87,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_031614) do
   add_foreign_key "exams", "subjects"
   add_foreign_key "grades", "enrollments", column: "enrollment_code", primary_key: "code"
   add_foreign_key "grades", "exams"
+  add_foreign_key "teacher_assignments", "courses"
+  add_foreign_key "teacher_assignments", "subjects"
+  add_foreign_key "teacher_assignments", "teachers"
 end
