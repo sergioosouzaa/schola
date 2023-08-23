@@ -1,0 +1,17 @@
+#!/bin/bash
+
+docker-compose > /dev/null 2>&1
+if [ "$?" = "127" ] ; then
+  shopt -s expand_aliases
+  alias docker-compose="docker compose"
+fi
+
+if [ -n "$(docker ps -f name=schola-app | grep -w 'Up' | awk '{print $NF}')" ]; then
+  echo "Re-Using Existing Container..."
+  CMD="docker exec -it schola-app bash -c '$@'"
+else
+  echo "Creating New Container..."
+  CMD="docker-compose run --name schola_tmp --rm schola-app bash -c 'bundle install && bundle exec rails db:setup && $@'"
+fi
+echo $CMD
+eval $CMD

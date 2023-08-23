@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resource :dashboard, only: :show
+
   resources :students
   resources :enrollments, param: :code
   resources :grades
@@ -10,5 +12,5 @@ Rails.application.routes.draw do
   resources :exams
   resources :subjects
 
-  root 'students#index'
+  root 'dashboard#show'
 end

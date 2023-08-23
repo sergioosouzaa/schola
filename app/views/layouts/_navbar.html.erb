@@ -8,6 +8,7 @@
             class="absolute py-5 lg:py-0 lg:px-4 xl:px-6 bg-white lg:bg-transparent shadow-lg rounded-lg max-w-[250px] w-full lg:max-w-full lg:w-full right-4 top-full lg:block lg:static lg:shadow-none"
           >
             <ul class="blcok lg:flex">
+              <%= render 'layouts/navitem', path: '/', text: 'Dashboard' %>
               <%= render 'layouts/navitem', path: students_path, text: 'Students' %>
               <%= render 'layouts/navitem', path: enrollments_path, text: 'Enrollments' %>
               <%= render 'layouts/navitem', path: grades_path, text: 'Grades' %>

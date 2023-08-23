@@ -1,0 +1,31 @@
+<div id="exams" class="min-w-full ">
+  <div class="rounded-xl overflow-auto">
+    <table class="border-collapse table-auto w-full text-sm">
+      <thead>
+        <tr>
+          <th class="bg-blue-100 border text-left px-8 py-4 whitespace-nowrap">Subject</th>
+          <th class="bg-blue-100 border text-left px-8 py-4 whitespace-nowrap">Student</th>
+          <th class="bg-blue-100 border text-left px-8 py-4 whitespace-nowrap">Course</th>
+          <th class="bg-blue-100 border text-left px-8 py-4 whitespace-nowrap">Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if data.empty? %>
+          <tr>
+            <td colspan="4" class="text-center"> No data </td>
+          </tr>
+        <% else %>
+          <% data.each do |row| %>
+            <tr>
+              <td class="border px-8 py-4 w-full whitespace-nowrap">-</td>
+              <td class="border px-8 py-4 w-full whitespace-nowrap">-</td>
+              <td class="border px-8 py-4 w-full whitespace-nowrap">-</td>
+              <td class="border px-8 py-4 w-full whitespace-nowrap">-</td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
