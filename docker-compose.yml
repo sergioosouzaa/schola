@@ -1,7 +1,6 @@
 version: '3'
 services:
   database:
-    container_name: schola-pg-db
     image: postgres:14.3
     ports:
       - 5432:5432
@@ -12,19 +11,19 @@ services:
       - ./tmp/database/postgresql:/var/lib/postgresql/data
 
   schola:
-    container_name: schola-app
     image: ruby:3.1.4
     user: 1000:1000
     working_dir: /app
+    tty: true
     environment:
       - BUNDLE_PATH=/app/bundle
-      - DB_HOST=schola-pg-db
+      - DB_HOST=database
       - RUBOCOP_CACHE_ROOT=./.cache
     volumes:
       - .:/app
     ports:
       - 3000:3000
-    command: /app/scripts/start
+    command: ["bash", "-c", "-l", "/app/scripts/start"]
     external_links:
       - database
     depends_on:
