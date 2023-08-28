@@ -97,6 +97,8 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
+    faker (1.9.6)
+      i18n (>= 0.7)
     ffaker (2.21.0)
     foreman (0.87.2)
     globalid (1.1.0)
@@ -138,7 +140,6 @@ GEM
     parser (3.2.2.3)
       ast (~> 2.4.1)
       racc
-    pg (1.5.3)
     public_suffix (5.0.3)
     puma (5.6.6)
       nio4r (~> 2.0)
@@ -242,6 +243,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    sqlite3 (1.6.4-x86_64-linux)
     tailwindcss-rails (2.0.30-x86_64-linux)
       railties (>= 6.0.0)
     thor (1.2.2)
@@ -269,9 +271,9 @@ DEPENDENCIES
   capybara (~> 3.39)
   debug
   factory_bot_rails (~> 6.2)
+  faker (~> 1.6, >= 1.6.6)
   ffaker (~> 2.21)
   foreman (~> 0.87.2)
-  pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.6)
   rspec-rails (~> 6.0)
@@ -284,6 +286,7 @@ DEPENDENCIES
   shoulda-matchers (~> 5.3)
   simplecov (~> 0.22.0)
   sprockets-rails
+  sqlite3 (~> 1.4)
   tailwindcss-rails
   tzinfo-data
   web-console

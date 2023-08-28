@@ -8,7 +8,8 @@ ruby '3.1.4'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.6'
 gem 'sprockets-rails'
-gem 'pg', '~> 1.1'
+# gem 'pg', '~> 1.1'
+gem "sqlite3", "~> 1.4"
 gem 'tailwindcss-rails'
 # gem "kredis"
 # gem "bcrypt", "~> 3.1.7"
@@ -20,6 +21,7 @@ group :development, :test do
   gem 'capybara', '~> 3.39'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails', '~> 6.2'
+  gem 'faker', '~> 1.6', '>= 1.6.6'
   gem 'ffaker', '~> 2.21'
   gem 'rspec-rails', '~> 6.0'
   gem 'shoulda-matchers', '~> 5.3'
