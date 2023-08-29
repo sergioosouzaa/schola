@@ -13,8 +13,8 @@ no 5° ano em 2021 e estava matrículado no 6° ano em 2022. A decisão de re-ma
 e não precisa levar em consideração notas;
 - não é necessários usar nenhuma lógica nos códigos de matrícula de um mesmo aluno em anos diferentes. POdem usar UUIDs
 mesmo;
-no ano em cada ano passado, cada aluno deve ter 8 notas em cada disciplina. No ano atual, coloquem 4 notas em cada disciplina.
-Os valores podem ser aliatórios, entre 0 e 10.
+- em cada ano passado, cada aluno deve ter 8 notas em cada disciplina. No ano atual, coloquem 4 notas em cada disciplina.
+Os valores podem ser aleatórios, entre 0 e 10.
 - o conjunto de professores pode ser fixo entre os diferentes anos, mas é necessário que haja alocações diferentes deles
 em disciplina, por exemplo, um professor que em um ano dava aulas de matemática e física pro 5° ano, em outro ano pode
 dar aulas apenas de física pro 9° ano e matemática no 6° ano. Usem a lógica que quiserem, inclusive aleatória;
