@@ -20,7 +20,6 @@ group :development, :test do
   gem 'capybara', '~> 3.39'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails', '~> 6.2'
-  gem 'faker', '~> 1.6', '>= 1.6.6'
   gem 'ffaker', '~> 2.21'
   gem 'rspec-rails', '~> 6.0'
   gem 'shoulda-matchers', '~> 5.3'
