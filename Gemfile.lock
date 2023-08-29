@@ -141,6 +141,7 @@ GEM
     parser (3.2.2.3)
       ast (~> 2.4.1)
       racc
+    pg (1.5.3)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -249,7 +250,6 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    sqlite3 (1.6.4-x86_64-linux)
     tailwindcss-rails (2.0.30-x86_64-linux)
       railties (>= 6.0.0)
     thor (1.2.2)
@@ -280,6 +280,7 @@ DEPENDENCIES
   faker (~> 1.6, >= 1.6.6)
   ffaker (~> 2.21)
   foreman (~> 0.87.2)
+  pg (~> 1.1)
   pry (~> 0.10.4)
   puma (~> 5.0)
   rails (~> 7.0.6)
@@ -293,7 +294,6 @@ DEPENDENCIES
   shoulda-matchers (~> 5.3)
   simplecov (~> 0.22.0)
   sprockets-rails
-  sqlite3 (~> 1.4)
   tailwindcss-rails
   tzinfo-data
   web-console

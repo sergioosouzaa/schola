@@ -8,8 +8,7 @@ ruby '3.1.4'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.6'
 gem 'sprockets-rails'
-# gem 'pg', '~> 1.1'
-gem "sqlite3", "~> 1.4"
+gem 'pg', '~> 1.1'
 gem 'tailwindcss-rails'
 # gem "kredis"
 # gem "bcrypt", "~> 3.1.7"
