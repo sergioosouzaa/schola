@@ -2,12 +2,21 @@
 
 NUM_EXAMS_NORMAL_YEAR = 8
 NUM_EXAMS_FINAL_YEAR = 4
+FIRST_YEAR = 2012
+LAST_YEAR = 2023
+FIRST_SCHOOL_GRADE = 5
+LAST_SCHOOL_GRADE = 9
+NUMBER_OF_SUBJECTS = 7
+NUMBER_OF_TEACHERS = 21
+MINIMUM_NUMBER_OF_STUDENTS_ON_CLASS = 20
+MAXIMUM_NUMBER_OF_STUDENTS_ON_CLASS = 20
+TEACHER_SUBJECT_RATIO = NUMBER_OF_TEACHERS / NUMBER_OF_SUBJECTS
 
 def create_courses
-  (2012..2023).each do |year|
-    (5..9).each do |grade|
+  (FIRST_YEAR..LAST_YEAR).each do |year|
+    (FIRST_SCHOOL_GRADE..LAST_SCHOOL_GRADE).each do |grade|
       course = FactoryBot.create(:course, year:, name: "#{grade}-#{year}")
-      if year == 2012 || grade == 5
+      if year == FIRST_YEAR || grade == FIRST_SCHOOL_GRADE
         create_new_class(course:)
       else
         create_students(year:, course:, grade:)
@@ -33,7 +42,7 @@ def create_teacher_assignments
   teachers = Teacher.all
   Course.find_each.with_index do |course, course_iteration|
     Subject.find_each.with_index do |subject, index|
-      teacher = teachers[(index * 3) + (course_iteration % 3)]
+      teacher = teachers[(index * TEACHER_SUBJECT_RATIO) + (course_iteration % TEACHER_SUBJECT_RATIO)]
       assignments << { teacher_id: teacher.id, subject_id: subject.id, course_id: course.id }
     end
   end
@@ -44,7 +53,7 @@ def create_exams
   exams = []
   Course.find_each do |course|
     Subject.find_each do |subject|
-      exam_num = course.year == 2023 ? NUM_EXAMS_FINAL_YEAR : NUM_EXAMS_NORMAL_YEAR
+      exam_num = course.year == LAST_YEAR ? NUM_EXAMS_FINAL_YEAR : NUM_EXAMS_NORMAL_YEAR
       exam_num.times do
         exams << { course_id: course.id, subject_id: subject.id }
       end
@@ -64,7 +73,7 @@ def create_all_grades
 end
 
 def create_new_class(course:)
-  rand(20..40).times do
+  rand(MINIMUM_NUMBER_OF_STUDENTS_ON_CLASS..MAXIMUM_NUMBER_OF_STUDENTS_ON_CLASS).times do
     student = FactoryBot.create(:student)
     FactoryBot.create(:enrollment, student:, course:)
   end
@@ -73,11 +82,11 @@ end
 start = Time.zone.now
 
 puts 'Creating Subjects...'
-FactoryBot.create_list(:subject, 7)
+FactoryBot.create_list(:subject, NUMBER_OF_SUBJECTS)
 puts 'Done!'
 
 puts 'Creating Teachers...'
-FactoryBot.create_list(:teacher, 21)
+FactoryBot.create_list(:teacher, NUMBER_OF_TEACHERS)
 puts 'Done!'
 
 puts 'Creating courses and students'
