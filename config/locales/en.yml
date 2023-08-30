@@ -7,6 +7,8 @@ en:
         create: Student was successfully created.
         update: Student was successfully updated.
         destroy: Student was successfully destroyed.
+      error:
+        not_enrolled: Student is not enrolled for this year.
     subject:
       success:
         create: Subject was successfully created.

@@ -2,12 +2,20 @@
 
 class StudentsController < ApplicationController
   before_action :set_student, only: %i[show edit update destroy]
+  before_action :set_year, only: %i[index show]
 
   def index
-    @students = Student.get_from_year(params[:year]).includes(enrollments: :course)
+    @students = Student.includes(enrollments: :course)
   end
 
-  def show; end
+  def show
+    @student_params = Student.get_from_year(@year).find_by(id: params[:id])
+    if @student_params
+      @grades = @student.grades.includes(enrollment: :student, exam: [:subject, :course]).where(courses: { year: @year })
+    else
+      flash.now[:alert] = I18n.t('flash.student.error.not_enrolled')
+    end
+  end
 
   def new
     @student = Student.new
@@ -39,6 +47,11 @@ class StudentsController < ApplicationController
   end
 
   private
+
+  def set_year
+    @year = params[:year].to_i
+    @year = 2023 unless (2012..2022).cover?(@year)
+  end
 
   def set_student
     @student = Student.find(params[:id])

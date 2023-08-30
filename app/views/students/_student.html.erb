@@ -9,6 +9,17 @@
     <%= student.born_on %>
   </p>
 
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Enrollment code:</strong>
+    <%= student.enrollments.joins(:course).where(courses: { year: }).first&.code || 'No enrollment' %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Course:</strong>
+      <% enrollment = student.enrollments.joins(:course).where(courses: { year: @year }).first %>
+      <%= enrollment ? enrollment.course.name : 'No courses' %>
+  </p>
+
   <% if action_name != "show" %>
     <%= link_to "Show this student", student, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%= link_to 'Edit this student', edit_student_path(student), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
