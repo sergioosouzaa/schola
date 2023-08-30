@@ -12,7 +12,7 @@
       <tbody>
         <% students.each do |student| %>
           <tr>
-            <td class="border px-8 py-4 whitespace-nowrap">-</td>
+            <td class="border px-8 py-4 whitespace-nowrap"><%= student.enrollments.first.code %></td>
             <td class="border px-8 py-4 w-full whitespace-nowrap"><%= student.name %></td>
             <td class="border px-8 py-4 whitespace-nowrap">-</td>
             <td class="border px-8 py-4 whitespace-nowrap">

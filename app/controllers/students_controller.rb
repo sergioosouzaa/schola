@@ -4,7 +4,7 @@ class StudentsController < ApplicationController
   before_action :set_student, only: %i[show edit update destroy]
 
   def index
-    @students = Student.all
+    @students = Student.get_from_year(params[:year]).includes(enrollments: :course)
   end
 
   def show; end

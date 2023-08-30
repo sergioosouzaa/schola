@@ -8,4 +8,9 @@ class Student < ApplicationRecord
   has_many :enrollments, dependent: :destroy
   has_many :grades, through: :enrollments
   has_many :courses, through: :enrollments
+
+  scope :get_from_year, -> (year) {
+    year = 2023 unless year.present? && (year.to_i < 2023 && year.to_i >= 2012)
+    joins(enrollments: :course).where(courses: { year: })
+  }
 end
