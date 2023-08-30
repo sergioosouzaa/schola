@@ -70,22 +70,7 @@ def create_new_class(course:)
   end
 end
 
-def destroy_previous_entries
-  Enrollment.destroy_all
-  Grade.destroy_all
-  Exam.destroy_all
-  TeacherAssignment.destroy_all
-  Course.destroy_all
-  Subject.destroy_all
-  Teacher.destroy_all
-  Student.destroy_all
-end
-
 start = Time.zone.now
-
-puts 'Destroying old entries'
-destroy_previous_entries
-puts 'Done!'
 
 puts 'Creating Subjects...'
 FactoryBot.create_list(:subject, 7)
