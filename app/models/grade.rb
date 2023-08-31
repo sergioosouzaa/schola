@@ -8,7 +8,7 @@ class Grade < ApplicationRecord
   belongs_to :enrollment, foreign_key: :enrollment_code, inverse_of: :grades
 
   scope :average_grades_from_year, -> (year, id) {
-    joins(enrollment: { course: { exams: :subject } })
+    joins(enrollment: :course, exam: :subject)
     .where(enrollments: { student_id: id })
     .where(courses: { year: })
     .group('subjects.name', 'courses.name', 'courses.year', 'enrollments.code')
