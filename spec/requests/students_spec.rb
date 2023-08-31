@@ -18,18 +18,109 @@ RSpec.describe '/students' do
   end
 
   describe 'GET /index' do
+    let!(:course) { create(:course, year: 2023) }
+    let!(:enrollment) { create(:enrollment, course:) }
+
     it 'renders a successful response' do
       Student.create! valid_attributes
       get students_url
       expect(response).to be_successful
     end
+
+    context 'when user has an enrollment on year' do
+      it 'renders the enrollments' do
+        get students_url
+        expect(response.body).to include(enrollment.code)
+      end
+
+      it 'renders the course name' do
+        get students_url
+        expect(response.body).to include(course.name)
+      end
+    end
+
+    context 'when user does not have an enrollment on year' do
+      let!(:course) { create(:course, year: 2012) }
+      let!(:enrollment) { create(:enrollment, course:) }
+
+      it 'renders the message that user does not have an enrollment' do
+        get students_url
+        expect(response.body).to include('No enrollments on this year')
+      end
+
+      it 'renders the message that user does not have a course' do
+        get students_url
+        expect(response.body).to include('No course on this year')
+      end
+    end
   end
 
   describe 'GET /show' do
-    it 'renders a successful response' do
-      student = Student.create! valid_attributes
-      get student_url(student)
-      expect(response).to be_successful
+    context 'when the user has an enrollment on the year' do
+      let!(:student) { create(:student) }
+      let!(:course) { create(:course, year: 2023) }
+      let!(:enrollment) { create(:enrollment, course:, student:) }
+      let!(:exam) { create(:exam, course:) }
+      let!(:grades) { create_list(:grade, 2, enrollment:, exam:) }
+
+      it 'renders a successful response' do
+        get student_url(student)
+        expect(response).to be_successful
+      end
+
+      it 'renders the student name' do
+        get student_url(student)
+        expect(response.body).to include(student.name)
+      end
+
+      it 'renders the course name' do
+        get student_url(student)
+        expect(response.body).to include(course.name)
+      end
+
+      it 'renders the enrollment name' do
+        get student_url(student)
+        expect(response.body).to include(enrollment.code)
+      end
+
+      it 'renders the grades name', aggregate_failures: true do
+        get student_url(student)
+        expect(response.body).to include(exam.subject.name)
+        expect(response.body).to include(format('%.02f', (grades.pluck(:value).sum / grades.count)))
+      end
+    end
+
+    context 'when the user does not have an enrollment on the year' do
+      let!(:student) { create(:student) }
+      let!(:course) { create(:course, year: 2012) }
+      let!(:enrollment) { create(:enrollment, course:, student:) }
+      let!(:exam) { create(:exam, course:) }
+      let!(:grades) { create_list(:grade, 2, enrollment:, exam:) }
+
+      it 'renders a successful response' do
+        get student_url(student)
+        expect(response).to be_successful
+      end
+
+      it 'renders the student name' do
+        get student_url(student)
+        expect(response.body).to include(student.name)
+      end
+
+      it 'renders the course name' do
+        get student_url(student)
+        expect(response.body).to include('No enrollment on this year')
+      end
+
+      it 'renders the enrollment name' do
+        get student_url(student)
+        expect(response.body).to include('No courses on this year')
+      end
+
+      it 'renders the error flash message' do
+        get student_url(student)
+        expect(flash[:alert]).to be_present
+      end
     end
   end
 

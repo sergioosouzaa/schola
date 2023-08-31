@@ -11,13 +11,13 @@
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Enrollment code:</strong>
-    <%= student.enrollments.joins(:course).where(courses: { year: }).first&.code || 'No enrollment' %>
+    <%= student.enrollments.joins(:course).where(courses: { year: }).first&.code || 'No enrollment on this year' %>
   </p>
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Course:</strong>
       <% enrollment = student.enrollments.joins(:course).where(courses: { year: @year }).first %>
-      <%= enrollment ? enrollment.course.name : 'No courses' %>
+      <%= enrollment ? enrollment.course.name : 'No courses on this year' %>
   </p>
 
   <% if action_name != "show" %>

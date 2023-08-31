@@ -1,0 +1,23 @@
+<div id="grades" class="min-w-full ">
+  <div class="rounded-xl overflow-auto">
+    <table class="border-collapse table-auto w-full text-sm">
+      <thead>
+        <tr>
+          <th class="bg-blue-100 border text-left px-8 py-4 whitespace-nowrap">Student</th>
+          <th class="bg-blue-100 border text-left px-8 py-4 whitespace-nowrap">Subject</th>
+          <th class="bg-blue-100 border text-left px-8 py-4 whitespace-nowrap">Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% subject_averages.each do |subject, average| %>
+          <tr>
+            <td class="border px-8 py-4 w-full whitespace-nowrap"><%= student.name %></td>
+            <td class="border px-8 py-4 w-full whitespace-nowrap"><%= subject.name %></td>
+            <td class="border px-8 py-4 w-full whitespace-nowrap"><%= format('%.02f', average) %></td>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

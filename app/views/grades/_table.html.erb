@@ -10,21 +10,16 @@
         </tr>
       </thead>
       <tbody>
-        <% Subject.find_each do |subject| %>
-          <%if grades.first %>
-            <tr>
-              <td class="border px-8 py-4 w-full whitespace-nowrap"><%= grades.first.enrollment.student.name %></td>
-              <td class="border px-8 py-4 w-full whitespace-nowrap"><%= subject.name %></td>
-                <% total_grades = @grades.select { |grade| grade.exam.subject_id == subject.id }.sum(&:value) %>
-                <% number_of_grades = @grades.select { |grade| grade.exam.subject_id == subject.id }.size %>
-                <% average = number_of_grades.zero? ? 0 : total_grades / number_of_grades %>
-              <td class="border px-8 py-4 w-full whitespace-nowrap"><%= format('%.02f', average) %></td>
-              <td class="border px-8 py-4 whitespace-nowrap">
-                <%# <%= link_to 'Show', grade, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-                <%# <%= link_to 'Edit', edit_grade_path(grade), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-              </td>
-            </tr>
-          <% end %>
+        <% grades.each do |grade| %>
+          <tr>
+            <td class="border px-8 py-4 w-full whitespace-nowrap"><%= grade.enrollment.code %> - <%= grade.enrollment.student.name %></td>
+            <td class="border px-8 py-4 w-full whitespace-nowrap"><%= grade.exam.subject.name %></td>
+            <td class="border px-8 py-4 w-full whitespace-nowrap"><%= format('%.02f', grade.value) %></td>
+            <td class="border px-8 py-4 whitespace-nowrap">
+              <%= link_to 'Show', grade, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+              <%= link_to 'Edit', edit_grade_path(grade), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+            </td>
+          </tr>
         <% end %>
       </tbody>
     </table>

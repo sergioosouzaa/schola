@@ -13,7 +13,7 @@
       <p class="my-5">
         <strong class="block font-medium mb-1">Grades:</strong>
         <% if @grades %>
-          <%= render 'grades/table', grades: @grades %>
+          <%= render 'students/average_grades', grades: @grades, subject_averages: @subject_averages, student: @student %>
           <% end %>
       </p>
 

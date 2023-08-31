@@ -10,6 +10,6 @@ class Student < ApplicationRecord
   has_many :courses, through: :enrollments
 
   scope :get_from_year, -> (year) {
-    includes(enrollments: :course).where(courses: { year: })
+    eager_load(enrollments: :course).where(courses: { year: })
   }
 end
