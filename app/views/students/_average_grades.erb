@@ -9,11 +9,11 @@
         </tr>
       </thead>
       <tbody>
-        <% subject_averages.each do |subject, average| %>
+        <% grades.each do |grade| %>
           <tr>
             <td class="border px-8 py-4 w-full whitespace-nowrap"><%= student.name %></td>
-            <td class="border px-8 py-4 w-full whitespace-nowrap"><%= subject.name %></td>
-            <td class="border px-8 py-4 w-full whitespace-nowrap"><%= format('%.02f', average) %></td>
+            <td class="border px-8 py-4 w-full whitespace-nowrap"><%= grade.subject %></td>
+            <td class="border px-8 py-4 w-full whitespace-nowrap"><%= format('%.02f', grade.avg_grade) %></td>
             </td>
           </tr>
         <% end %>

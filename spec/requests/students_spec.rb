@@ -18,8 +18,10 @@ RSpec.describe '/students' do
   end
 
   describe 'GET /index' do
-    let!(:course) { create(:course, year: 2023) }
-    let!(:enrollment) { create(:enrollment, course:) }
+    let!(:course_default_year) { create(:course, year: 2023) }
+    let!(:course_old_year) { create(:course, year: 2021) }
+    let!(:enrollments_default_year) { create_list(:enrollment, 2, course: course_default_year) }
+    let!(:enrollments_old_year) { create_list(:enrollment, 2, course: course_old_year) }
 
     it 'renders a successful response' do
       Student.create! valid_attributes
@@ -27,48 +29,53 @@ RSpec.describe '/students' do
       expect(response).to be_successful
     end
 
-    context 'when user has an enrollment on year' do
-      it 'renders the enrollments' do
+    context 'when no year is specified in the URI' do
+      it 'renders only the enrollments for the default year', aggregate_failures: true do
         get students_url
-        expect(response.body).to include(enrollment.code)
+
+        expect(response.body).to include(enrollments_default_year.first.code)
+        expect(response.body).to include(enrollments_default_year.second.code)
+        expect(response.body).not_to include(enrollments_old_year.first.code)
+        expect(response.body).not_to include(enrollments_old_year.second.code)
       end
 
-      it 'renders the course name' do
+      it 'renders the names of the courses for the default year' do
         get students_url
-        expect(response.body).to include(course.name)
+        expect(response.body).to include(course_default_year.name)
       end
     end
 
-    context 'when user does not have an enrollment on year' do
-      let!(:course) { create(:course, year: 2012) }
-      let!(:enrollment) { create(:enrollment, course:) }
+    context 'when the year is specified on the URI' do
+      it 'renders only the enrollments for the default year', aggregate_failures: true do
+        get '/students?year=2021'
 
-      it 'renders the message that user does not have an enrollment' do
-        get students_url
-        expect(response.body).to include('No enrollments on this year')
+        expect(response.body).not_to include(enrollments_default_year.first.code)
+        expect(response.body).not_to include(enrollments_default_year.second.code)
+        expect(response.body).to include(enrollments_old_year.first.code)
+        expect(response.body).to include(enrollments_old_year.second.code)
       end
 
-      it 'renders the message that user does not have a course' do
-        get students_url
-        expect(response.body).to include('No course on this year')
+      it 'renders the names of the courses for the default year' do
+        get '/students?year=2021'
+        expect(response.body).to include(course_old_year.name)
       end
     end
   end
 
   describe 'GET /show' do
-    context 'when the user has an enrollment on the year' do
-      let!(:student) { create(:student) }
-      let!(:course) { create(:course, year: 2023) }
-      let!(:enrollment) { create(:enrollment, course:, student:) }
-      let!(:exam) { create(:exam, course:) }
-      let!(:grades) { create_list(:grade, 2, enrollment:, exam:) }
+    let!(:student) { create(:student) }
+    let!(:course) { create(:course, year: 2023) }
+    let!(:enrollment) { create(:enrollment, course:, student:) }
+    let!(:exam) { create(:exam, course:) }
+    let!(:grades) { create_list(:grade, 2, enrollment:, exam:) }
 
+    context 'when the user has an enrollment on the year' do
       it 'renders a successful response' do
         get student_url(student)
         expect(response).to be_successful
       end
 
-      it 'renders the student name' do
+      it 'renders the student\'s name' do
         get student_url(student)
         expect(response.body).to include(student.name)
       end
@@ -78,12 +85,12 @@ RSpec.describe '/students' do
         expect(response.body).to include(course.name)
       end
 
-      it 'renders the enrollment name' do
+      it 'renders the enrollment code' do
         get student_url(student)
         expect(response.body).to include(enrollment.code)
       end
 
-      it 'renders the grades name', aggregate_failures: true do
+      it 'renders the grades average', aggregate_failures: true do
         get student_url(student)
         expect(response.body).to include(exam.subject.name)
         expect(response.body).to include(format('%.02f', (grades.pluck(:value).sum / grades.count)))
@@ -91,35 +98,30 @@ RSpec.describe '/students' do
     end
 
     context 'when the user does not have an enrollment on the year' do
-      let!(:student) { create(:student) }
-      let!(:course) { create(:course, year: 2012) }
-      let!(:enrollment) { create(:enrollment, course:, student:) }
-      let!(:exam) { create(:exam, course:) }
-      let!(:grades) { create_list(:grade, 2, enrollment:, exam:) }
-
       it 'renders a successful response' do
-        get student_url(student)
+        get "/students/#{student.id}?year=2021"
         expect(response).to be_successful
       end
 
       it 'renders the student name' do
-        get student_url(student)
+        get "/students/#{student.id}?year=2021"
         expect(response.body).to include(student.name)
       end
 
-      it 'renders the course name' do
-        get student_url(student)
+      it 'renders that there are no enrollments for this year' do
+        get "/students/#{student.id}?year=2021"
         expect(response.body).to include('No enrollment on this year')
       end
 
-      it 'renders the enrollment name' do
-        get student_url(student)
+      it 'render that there are no courses this year' do
+        get "/students/#{student.id}?year=2021"
         expect(response.body).to include('No courses on this year')
       end
 
-      it 'renders the error flash message' do
-        get student_url(student)
+      it 'renders the alert flash message', aggregate_failures: true do
+        get "/students/#{student.id}?year=2021"
         expect(flash[:alert]).to be_present
+        expect(flash[:alert]).to eq('Student is not enrolled for this year.')
       end
     end
   end

@@ -8,20 +8,18 @@
       <p class="py-2 px-3 bg-red-50 mb-5 text-red-500 font-medium rounded-lg inline-block" id="notice"><%= alert %></p>
     <% end %>
 
-    <%= render partial: 'students/student', locals: {  student: @student, year: @year, student_params: @student_params } %>
-    <% if @student %> 
-      <p class="my-5">
-        <strong class="block font-medium mb-1">Grades:</strong>
-        <% if @grades %>
-          <%= render 'students/average_grades', grades: @grades, subject_averages: @subject_averages, student: @student %>
-          <% end %>
-      </p>
+    <%= render partial: 'students/student', locals: { grades: @grades, student: @student } %>
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Grades:</strong>
+      <% if @grades %>
+        <%= render 'students/average_grades', grades: @grades, student: @student %>
+      <% end %>
+    </p>
 
-      <%= link_to 'Edit this student', edit_student_path(@student), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      <div class="inline-block ml-2">
-        <%= button_to 'Destroy this student', student_path(@student), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
-      </div>
-      <%= link_to 'Back to students', students_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <% end %>
+    <%= link_to 'Edit this student', edit_student_path(@student), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <div class="inline-block ml-2">
+      <%= button_to 'Destroy this student', student_path(@student), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+    </div>
+    <%= link_to 'Back to students', students_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   </div>
 </div>

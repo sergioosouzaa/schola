@@ -5,20 +5,13 @@ class StudentsController < ApplicationController
   before_action :set_year, only: %i[index show]
 
   def index
-    @students = Enrollment.joins(:course)
-    .where("courses.year = ?", @year)
-    .joins("RIGHT JOIN students ON students.id = enrollments.student_id")
-    .order("students.name")
-    .select("enrollments.code, students.name AS student_name, courses.name AS course_name, courses.year")
+    @students = Student.index_from_year(@year)
   end
 
   def show
-    @student_params = Student.get_from_year(@year).find_by(id: params[:id])
-    if @student_params
-      calculate_grades
-    else
-      flash.now[:alert] = I18n.t('flash.student.error.not_enrolled')
-    end
+    @grades = Grade.average_grades_from_year(@year, params[:id])
+
+    flash.now[:alert] = I18n.t('flash.student.error.not_enrolled') unless @grades.first
   end
 
   def new
@@ -51,18 +44,6 @@ class StudentsController < ApplicationController
   end
 
   private
-
-  def calculate_grades
-    @grades = @student.grades.includes(exam: %i[subject course]).where(courses: { year: @year })
-
-    @subject_averages = {}
-    @grades.group_by { |grade| grade.exam.subject }.each do |subject, grades|
-      total_grades = grades.sum(&:value)
-      number_of_grades = grades.size
-      average = number_of_grades.zero? ? 0 : total_grades / number_of_grades
-      @subject_averages[subject] = average
-    end
-  end
 
   def set_year
     @year = params[:year].to_i
