@@ -110,12 +110,12 @@ RSpec.describe '/students' do
 
       it 'renders that there are no enrollments for this year' do
         get "/students/#{student.id}?year=2021"
-        expect(response.body).to include('No enrollment on this year')
+        expect(response.body).not_to include(enrollment.code)
       end
 
       it 'render that there are no courses this year' do
         get "/students/#{student.id}?year=2021"
-        expect(response.body).to include('No courses on this year')
+        expect(response.body).not_to include(course.name)
       end
 
       it 'renders the alert flash message', aggregate_failures: true do

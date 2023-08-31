@@ -11,12 +11,12 @@
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Enrollment code:</strong>
-    <%= grades&.first&.code || 'No enrollment on this year' %>
+    <%= grades&.first&.code || '-' %>
   </p>
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Course:</strong>
-      <%= grades&.first&.course || 'No courses on this year' %>
+      <%= grades&.first&.course || '-' %>
   </p>
 
   <% if action_name != "show" %>
