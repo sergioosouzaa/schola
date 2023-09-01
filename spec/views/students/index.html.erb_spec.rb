@@ -12,7 +12,7 @@ RSpec.describe 'students/index' do
     assign(:students, Student.index_from_year('2023'))
   end
 
-  it 'renders a table of students', aggregate_failures: true do
+  it 'renders a table of students' do
     render
 
     expect(rendered).to have_table(with_cols: [students.pluck(:name)])
