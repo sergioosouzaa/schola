@@ -3,16 +3,19 @@
 require 'rails_helper'
 
 RSpec.describe 'students/index' do
-  let(:students) { create_list(:student, 2) }
+  let!(:students) { create_list(:student, 2) }
+  let!(:course) { create(:course, year: 2023) }
+  let!(:enrollment_first) { create(:enrollment, course:, student: students.first) }
+  let!(:enrollment_second) { create(:enrollment, course:, student: students.second) }
 
   before do
-    assign(:students, students)
+    assign(:students, Student.with_enrollment_details_from_year('2023'))
   end
 
   it 'renders a table of students' do
     render
 
-    expect(rendered).to have_table(with_cols: [students.map(&:name)])
+    expect(rendered).to have_table(with_cols: [students.pluck(:name)])
   end
 
   it 'renders actions links' do

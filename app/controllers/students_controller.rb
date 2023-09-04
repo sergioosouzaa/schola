@@ -2,12 +2,17 @@
 
 class StudentsController < ApplicationController
   before_action :set_student, only: %i[show edit update destroy]
+  before_action :set_year, only: %i[index show]
 
   def index
-    @students = Student.all
+    @students = Student.with_enrollment_details_from_year(@year)
   end
 
-  def show; end
+  def show
+    @grades = Grade.average_grades_from_year(@year, params[:id])
+
+    flash.now[:alert] = I18n.t('flash.student.error.not_enrolled') unless @grades.first
+  end
 
   def new
     @student = Student.new
@@ -39,6 +44,10 @@ class StudentsController < ApplicationController
   end
 
   private
+
+  def set_year
+    @year = params[:year] || Time.current.year
+  end
 
   def set_student
     @student = Student.find(params[:id])
