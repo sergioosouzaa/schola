@@ -5,7 +5,7 @@ class StudentsController < ApplicationController
   before_action :set_year, only: %i[index show]
 
   def index
-    @students = Student.index_from_year(@year)
+    @students = Student.with_enrollment_details_from_year(@year)
   end
 
   def show
@@ -46,8 +46,7 @@ class StudentsController < ApplicationController
   private
 
   def set_year
-    @year = params[:year].to_i
-    @year = 2023 unless (2012..2022).cover?(@year)
+    @year = params[:year] || Time.current.year
   end
 
   def set_student

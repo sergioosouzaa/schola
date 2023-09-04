@@ -9,11 +9,9 @@ class Student < ApplicationRecord
   has_many :grades, through: :enrollments
   has_many :courses, through: :enrollments
 
-  scope :index_from_year, -> (year) {
-    joins("LEFT JOIN (SELECT e.code, c.name, c.year, e.student_id
-      FROM enrollments e
-     JOIN courses c ON c.id = e.course_id AND c.year = #{year}) AS active_enrollments ON active_enrollments.student_id = students.id")
-    .order("students.name, active_enrollments.year")
-    .select("students.id AS id, active_enrollments.code AS enrollment_code, students.name AS student_name, active_enrollments.name AS course_name, active_enrollments.year")
+  scope :with_enrollment_details_from_year, lambda { |year|
+    joins("LEFT JOIN (#{Enrollment.by_course.by_year(year).to_sql}) temp on temp.student_id = students.id")
+      .order('students.name ASC')
+      .select('students.id AS id, temp.enrollment_code AS enrollment_code, students.name AS student_name, temp.course AS course_name')
   }
 end

@@ -9,7 +9,7 @@ RSpec.describe 'students/index' do
   let!(:enrollment_second) { create(:enrollment, course:, student: students.second) }
 
   before do
-    assign(:students, Student.index_from_year('2023'))
+    assign(:students, Student.with_enrollment_details_from_year('2023'))
   end
 
   it 'renders a table of students' do
